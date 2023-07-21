@@ -1,11 +1,30 @@
 import React from 'react'
 import './login.scss'
 import useForm from '../../hooks/useForm'
-const Login = () => {
+import { getUser } from '../../servises/usersServices'
+import Swal from 'sweetalert2'
+const Login = ({signIn}) => {
     const [dataForm, handleChange, resetForm ] = useForm()
-const handleSubmit = (event) =>{
+const handleSubmit = async(event) =>{
     event.preventDefault()
-    console.log(dataForm)
+    const loggedUser = await getUser(dataForm)
+    if(loggedUser){
+      Swal.fire(
+       `Excelente ${loggedUser.name}`,
+        'Has iniciado sesion con exito!',
+        `success`
+      )
+      .then(()=>{
+        signIn(true)
+      })
+    }else{
+      Swal.fire(
+        `Ups`,
+         'Usuario no encontrado',
+         `error`
+       )
+    }
+    console.log(loggedUser);
     resetForm()
 }
 
