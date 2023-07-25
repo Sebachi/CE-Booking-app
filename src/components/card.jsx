@@ -3,7 +3,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
+import { CardActionArea, Rating } from '@mui/material';
 
 export default function ActionAreaCard({prop}) {
   return (
@@ -19,7 +19,7 @@ export default function ActionAreaCard({prop}) {
           <Typography gutterBottom variant="h5" component="div">
           {prop.name}
           <br />
-          <span>{prop.rating}⭐</span>
+          <Rating value={prop.rating} readOnly />
           </Typography>
           <Typography variant="body2" color="text.secondary">
             <span>{prop.pricepernight}</span>
