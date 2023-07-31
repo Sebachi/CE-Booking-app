@@ -4,9 +4,18 @@ import PublicRouter from "./publicRouter";
 import PrivateRouter from "./privateRouter";
 import Login from "../pages/login/login";
 import Home from "../pages/home/home";
+import useSessionStorage from "../hooks/useSesionStorage";
+import { useEffect } from "react";
 
 const Router = () => {
+  const key = "user"
 const [isLogin, setIsLogin] = useState(false);
+const { dataStorage } = useSessionStorage(key);
+useEffect(() =>{
+  if(Object.entries(dataStorage).length){
+    setIsLogin(true)
+  }
+},[])
   return (
     <BrowserRouter>
       <Routes>

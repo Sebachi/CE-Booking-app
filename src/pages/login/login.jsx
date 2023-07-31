@@ -3,8 +3,11 @@ import './login.scss'
 import useForm from '../../hooks/useForm'
 import { getUser } from '../../servises/usersServices'
 import Swal from 'sweetalert2'
+import useSessionStorage from '../../hooks/useSesionStorage'
 const Login = ({signIn}) => {
+    const key = "user";
     const [dataForm, handleChange, resetForm ] = useForm()
+    const {saveInfoSesion} = useSessionStorage(key)
 const handleSubmit = async(event) =>{
     event.preventDefault()
     const loggedUser = await getUser(dataForm)
@@ -16,6 +19,7 @@ const handleSubmit = async(event) =>{
       )
       .then(()=>{
         signIn(true)
+        saveInfoSesion(key, loggedUser)
       })
     }else{
       Swal.fire(
